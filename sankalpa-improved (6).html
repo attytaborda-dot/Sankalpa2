@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sankalpa – Ayurvedic Wellness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & ROOT ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --green-dark:#3a4e2a;
+  --green:#465a32;
+  --green-mid:#5a7a3e;
+  --green-light:#7a9a5e;
+  --gold:#9e8d52;
+  --gold-light:#c4b070;
+  --cream:#f7f4ee;
+  --cream-warm:#efe9dc;
+  --white:#ffffff;
+  --text-dark:#2c2c2c;
+  --text-mid:#5a5a5a;
+  --text-light:#8a8a8a;
+  --radius:12px;
+  --radius-lg:20px;
+  --shadow:0 2px 20px rgba(70,90,50,.08);
+  --shadow-hover:0 6px 32px rgba(70,90,50,.18);
+  --transition:.35s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Raleway',sans-serif;
+  background:var(--cream);color:var(--text-dark);
+  line-height:1.6;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* ===== NAVBAR ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(247,244,238,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(70,90,50,.1);
+  transition:var(--transition);
+}
+.nav-inner{
+  max-width:1100px;margin:0 auto;
+  padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo img{height:38px;width:auto;transition:var(--transition)}
+nav.scrolled .nav-logo img{height:30px}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{
+  font-size:.78rem;text-transform:uppercase;letter-spacing:.18em;
+  color:var(--green-dark);font-weight:500;position:relative;
+  padding-bottom:.3rem;transition:var(--transition);
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:2px;
+  background:var(--gold);transition:var(--transition);
+}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a:hover{color:var(--green)}
+
+/* hamburger – mobile */
+.hamburger{display:none;flex-direction:column;gap:5px;padding:.4rem;cursor:pointer}
+.hamburger span{width:24px;height:2px;background:var(--green-dark);border-radius:2px;transition:var(--transition)}
+.mobile-menu{
+  display:none;position:fixed;inset:0;background:var(--cream);z-index:999;
+  flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:1.1rem;text-transform:uppercase;letter-spacing:.2em;color:var(--green-dark);font-weight:500}
+.mobile-close{position:absolute;top:1.2rem;right:1.5rem;font-size:1.8rem;color:var(--green-dark)}
+
+/* ===== HERO / LANDING ===== */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:6rem 1.5rem 3rem;position:relative;
+  background:url('https://github.com/attytaborda-dot/Sankalpa2/blob/main/Entrance1.png?raw=true') center/cover no-repeat;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:rgba(247,244,238,.40);
+  pointer-events:none;
+}
+/* hero overlay handled by ::after above */
+.hero-logo{
+  width:280px;max-width:70vw;margin-bottom:2.4rem;
+  animation:fadeDown .9s var(--transition) both;
+  position:relative;z-index:1;
+}
+.hero-logo img{width:100%;height:auto;display:block}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+
+/* NEW: Hero title */
+.hero-title{
+  text-align:center;position:relative;z-index:1;
+  animation:fadeUp .9s .1s var(--transition) both;
+  margin-bottom:1.2rem;
+}
+.hero-title h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.8rem;font-weight:300;color:var(--green-dark);
+  line-height:1.3;margin-bottom:.8rem;
+}
+.hero-title h1 em{
+  font-style:italic;font-weight:400;
+}
+
+/* NEW: Hero description */
+.hero-description{
+  max-width:620px;text-align:center;
+  font-size:1rem;line-height:1.75;color:var(--text-mid);
+  position:relative;z-index:1;
+  animation:fadeUp .9s .15s var(--transition) both;
+  margin-bottom:2.5rem;
+}
+
+.hero-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.7rem;font-weight:300;color:var(--green-dark);
+  letter-spacing:.08em;margin-bottom:2rem;
+  text-align:center;position:relative;z-index:1;
+  animation:fadeUp .9s .25s var(--transition) both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* 3 category buttons - UPDATED with green background and white text */
+.cat-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;
+  margin-bottom:1.6rem;position:relative;z-index:1;
+  animation:fadeUp .9s .35s var(--transition) both;
+}
+.cat-btn{
+  background:var(--green);border:1.5px solid var(--green);
+  color:var(--white);padding:.7rem 1.5rem;border-radius:50px;
+  font-size:.82rem;font-weight:500;text-transform:uppercase;letter-spacing:.14em;
+  transition:var(--transition);
+}
+.cat-btn:hover{background:var(--green-mid);border-color:var(--green-mid);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+
+/* Learn more button */
+.learn-btn{
+  background:var(--gold);color:var(--white);
+  padding:.75rem 2.2rem;border-radius:50px;
+  font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;
+  transition:var(--transition);position:relative;z-index:1;
+  animation:fadeUp .9s .5s var(--transition) both;
+}
+.learn-btn:hover{background:var(--gold-light);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+
+/* scroll hint */
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  color:var(--text-light);font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;
+  animation:pulse 2s infinite;
+}
+.scroll-hint svg{width:18px;height:18px}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* ===== SHARED SECTION STYLES ===== */
+.section{padding:6rem 1.5rem;position:relative}
+.section:nth-child(even){background:var(--white)}
+.section:nth-child(odd){background:var(--cream)}
+
+.section-inner{max-width:1000px;margin:0 auto}
+
+/* two-col layout */
+.two-col{
+  display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;
+}
+.two-col.reverse{direction:rtl}
+.two-col.reverse > *{direction:ltr}
+
+/* image placeholder (gradient card) */
+.img-card{
+  border-radius:var(--radius-lg);overflow:hidden;
+  aspect-ratio:4/5;position:relative;
+  box-shadow:var(--shadow-hover);
+}
+.img-card .gradient-overlay{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.img-card .img-icon{width:80px;height:80px;opacity:.35}
+
+/* section heading */
+.sec-head{margin-bottom:1.8rem}
+.sec-head .label{
+  font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;
+  color:var(--gold);font-weight:600;margin-bottom:.6rem;display:block;
+}
+.sec-head h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.4rem;font-weight:400;color:var(--green-dark);line-height:1.2;
+}
+.sec-head p{
+  margin-top:.8rem;font-size:.94rem;color:var(--text-mid);max-width:480px;line-height:1.7;
+}
+
+/* CTA button inside sections */
+.cta-btn{
+  display:inline-block;margin-top:1.6rem;
+  background:var(--green);color:var(--white);
+  padding:.72rem 2rem;border-radius:50px;
+  font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;
+  transition:var(--transition);
+}
+.cta-btn:hover{background:var(--green-mid);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+
+/* gradient palettes per section */
+.grad-massage{background:linear-gradient(135deg,#c8d4b8,#8aaa7a)}
+.grad-reiki{background:linear-gradient(135deg,#b8cce0,#7a9ebd)}
+.grad-ayurvedic{background:linear-gradient(135deg,#d4c5a0,#a89060)}
+
+/* ===== MEET YOUR GUIDE SECTION ===== */
+.guide-section{
+  background:var(--cream-warm);
+  padding:6rem 1.5rem;
+}
+.guide-inner{
+  max-width:1000px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:center;
+}
+.guide-image-wrapper{
+  position:relative;
+}
+.guide-image{
+  border-radius:var(--radius-lg);overflow:hidden;
+  aspect-ratio:3/4;
+  box-shadow:var(--shadow-hover);
+}
+.guide-image img{
+  width:100%;height:100%;object-fit:cover;
+}
+.guide-badge{
+  position:absolute;bottom:-1.5rem;left:50%;transform:translateX(-50%);
+  background:var(--white);
+  padding:1.5rem 2.5rem;border-radius:var(--radius);
+  box-shadow:var(--shadow-hover);
+  text-align:center;
+}
+.guide-badge .years{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.5rem;font-weight:500;color:var(--green-dark);
+  line-height:1;margin-bottom:.3rem;
+}
+.guide-badge .label{
+  font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;
+  color:var(--text-mid);font-weight:500;
+}
+.guide-content .sec-label{
+  font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;
+  color:var(--gold);font-weight:600;margin-bottom:.8rem;display:block;
+}
+.guide-content h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.8rem;font-weight:400;color:var(--green-dark);
+  margin-bottom:1.2rem;line-height:1.2;
+}
+.guide-content p{
+  font-size:.95rem;line-height:1.75;color:var(--text-mid);
+  margin-bottom:1.2rem;
+}
+.guide-signature{
+  margin-top:1.8rem;
+}
+.guide-signature .name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:400;color:var(--green-dark);
+  font-style:italic;margin-bottom:.2rem;
+}
+.guide-signature .title{
+  font-size:.8rem;text-transform:uppercase;letter-spacing:.18em;
+  color:var(--text-light);font-weight:500;
+}
+
+/* ===== CONTACT SECTION ===== */
+.contact-section{
+  background:linear-gradient(180deg, rgba(255,255,255,.40) 0%, rgba(247,244,238,.45) 100%),
+    url('https://github.com/attytaborda-dot/Sankalpa2/blob/main/Conctact.png?raw=true') center/cover no-repeat;
+  padding:6rem 1.5rem;
+}
+.contact-inner{
+  max-width:1000px;margin:0 auto;text-align:center;
+}
+.contact-inner .sec-label{
+  font-size:.7rem;text-transform:uppercase;letter-spacing:.22em;
+  color:var(--gold);font-weight:600;margin-bottom:.8rem;display:block;
+}
+.contact-inner h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.8rem;font-weight:400;color:var(--green-dark);
+  margin-bottom:3rem;
+}
+.contact-cards{
+  display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  gap:2rem;margin-bottom:2rem;
+}
+.contact-card{
+  background:var(--cream);
+  padding:2.5rem 2rem;border-radius:var(--radius-lg);
+  transition:var(--transition);
+  box-shadow:var(--shadow);
+}
+.contact-card:hover{
+  box-shadow:var(--shadow-hover);
+  transform:translateY(-4px);
+}
+.contact-icon{
+  width:60px;height:60px;margin:0 auto 1.2rem;
+  background:var(--white);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.contact-icon svg{
+  width:28px;height:28px;
+}
+.contact-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:500;color:var(--green-dark);
+  margin-bottom:.8rem;
+}
+.contact-card p{
+  font-size:.9rem;line-height:1.6;color:var(--text-mid);
+}
+.contact-card .detail{
+  color:var(--green-dark);font-weight:500;
+  margin-top:.5rem;
+}
+
+/* ===== FOOTER ===== */
+footer{background:var(--green-dark);color:rgba(255,255,255,.6);padding:2.5rem 1.5rem;text-align:center}
+footer p{font-size:.78rem}
+footer a{color:var(--gold);transition:var(--transition)}
+footer a:hover{color:var(--gold-light)}
+
+/* ===== ABOUT + TESTIMONIALS ===== */
+.about-section{
+  background:linear-gradient(180deg, rgba(58,78,42,.50) 0%, rgba(58,78,42,.60) 100%),
+    url('https://github.com/attytaborda-dot/Sankalpa2/blob/main/About1.png?raw=true') center/cover no-repeat;
+  color:var(--white);padding:6rem 1.5rem;
+}
+.about-inner{max-width:900px;margin:0 auto;text-align:center}
+.about-inner .label{color:var(--gold)}
+.about-inner h2{
+  font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;
+  color:var(--white);margin-bottom:1rem;
+}
+.about-inner > p{font-size:.96rem;color:rgba(255,255,255,.7);max-width:640px;margin:0 auto 3rem;line-height:1.8}
+
+/* testimonials grid */
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.testimonial-card{
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--radius);padding:2rem 1.5rem;
+  transition:var(--transition);
+}
+.testimonial-card:hover{background:rgba(255,255,255,.11);transform:translateY(-3px)}
+.testimonial-card .stars{color:var(--gold);font-size:1rem;margin-bottom:.7rem;letter-spacing:.15em}
+.testimonial-card p{font-size:.86rem;color:rgba(255,255,255,.72);line-height:1.7;font-style:italic;margin-bottom:1rem}
+.testimonial-card .author{font-size:.75rem;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.45)}
+
+/* ===== BOOKING SECTIONS ===== */
+.booking-section{padding:6rem 1.5rem;background:var(--cream)}
+.booking-section:nth-child(even){background:var(--white)}
+.booking-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.booking-info{display:flex;flex-direction:column;gap:2rem}
+.booking-info-text p{font-size:.95rem;line-height:1.75;color:var(--text-mid);margin-bottom:1.2rem}
+.booking-info-text ul{list-style:none;padding-left:0}
+.booking-info-text ul li{
+  font-size:.88rem;color:var(--text-mid);padding:.6rem 0;
+  border-bottom:1px solid rgba(70,90,50,.1);
+  padding-left:1.5rem;position:relative;
+}
+.booking-info-text ul li::before{
+  content:'✓';position:absolute;left:0;color:var(--green);font-weight:600;
+}
+
+/* booking form */
+.booking-form-wrap{
+  background:var(--white);padding:2.5rem;border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-hover);
+}
+.form-group{margin-bottom:1.4rem}
+.form-group label{
+  display:block;font-size:.8rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--green-dark);margin-bottom:.5rem;
+}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:.85rem 1rem;border-radius:var(--radius);
+  border:1.5px solid rgba(70,90,50,.2);background:var(--cream);
+  font-family:inherit;font-size:.9rem;color:var(--text-dark);
+  transition:var(--transition);
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--green);background:var(--white);
+}
+.form-group textarea{
+  min-height:80px;resize:vertical;
+}
+.price-display{
+  background:var(--cream-warm);padding:1.2rem;border-radius:var(--radius);
+  text-align:center;margin:1.5rem 0;
+  font-size:2rem;font-family:'Cormorant Garamond',serif;
+  color:var(--green-dark);font-weight:500;
+}
+.price-display span:last-child{font-size:.85rem;color:var(--text-mid);font-family:'Raleway',sans-serif;font-weight:400}
+.book-btn{
+  width:100%;padding:1rem;background:var(--green);color:var(--white);
+  border-radius:50px;font-size:.85rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.16em;
+  transition:var(--transition);
+}
+.book-btn:hover{background:var(--green-mid);box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+
+/* modal */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  display:flex;align-items:center;justify-content:center;
+  z-index:9999;opacity:0;pointer-events:none;
+  transition:var(--transition);
+}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal-card{
+  background:var(--white);padding:2.5rem;border-radius:var(--radius-lg);
+  max-width:450px;width:90%;text-align:center;position:relative;
+  transform:scale(.9);transition:var(--transition);
+}
+.modal-overlay.open .modal-card{transform:scale(1)}
+.modal-close{
+  position:absolute;top:1rem;right:1rem;font-size:1.8rem;
+  color:var(--text-light);transition:var(--transition);
+}
+.modal-close:hover{color:var(--text-dark)}
+.modal-check{
+  width:60px;height:60px;margin:0 auto 1.2rem;
+  background:var(--green);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-check svg{width:32px;height:32px;stroke:var(--white);stroke-width:3;fill:none}
+.modal-card h3{
+  font-family:'Cormorant Garamond',serif;font-size:1.8rem;
+  color:var(--green-dark);margin-bottom:.8rem;
+}
+.modal-card > p{font-size:.9rem;color:var(--text-mid);margin-bottom:1.5rem}
+.modal-detail{
+  background:var(--cream);padding:1.2rem;border-radius:var(--radius);
+  font-size:.85rem;line-height:1.6;color:var(--text-dark);
+  margin-bottom:1.5rem;
+}
+.modal-btn{
+  width:100%;padding:.9rem;background:var(--green);color:var(--white);
+  border-radius:50px;font-size:.85rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.16em;
+  transition:var(--transition);
+}
+.modal-btn:hover{background:var(--green-mid)}
+
+/* reveal animation */
+.reveal{opacity:0;transform:translateY(30px);transition:var(--transition)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:900px){
+  .two-col,.booking-inner,.guide-inner{grid-template-columns:1fr;gap:2.5rem}
+  .two-col.reverse{direction:ltr}
+  .hero-title h1{font-size:2.2rem}
+  .guide-content h2{font-size:2.2rem}
+  .contact-inner h2{font-size:2.2rem}
+  .testimonials{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .cat-btns{flex-direction:column;width:100%;max-width:300px}
+  .cat-btn{width:100%;text-align:center}
+  .contact-cards{grid-template-columns:1fr}
+  .hero-title h1{font-size:1.8rem}
+  .guide-content h2{font-size:1.8rem}
+  .contact-inner h2{font-size:2rem}
+  .testimonials{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="https://raw.githubusercontent.com/attytaborda-dot/Sankalpa2/main/Jemlogo2.png" alt="Sankalpa Logo"/>
+    </a>
+    <div class="nav-links">
+      <a href="#book-massage">Massage</a>
+      <a href="#book-reiki">Reiki</a>
+      <a href="#book-ayurvedic">Ayurvedic</a>
+      <a href="#about">About</a>
+      <a href="#guide">Guide</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">&times;</button>
+  <a href="#book-massage" class="mobile-link">Massage</a>
+  <a href="#book-reiki" class="mobile-link">Reiki</a>
+  <a href="#book-ayurvedic" class="mobile-link">Ayurvedic</a>
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#guide" class="mobile-link">Guide</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-logo">
+    <img src="https://raw.githubusercontent.com/attytaborda-dot/Sankalpa2/main/Jemlogo3.png" alt="Sankalpa Logo"/>
+  </div>
+
+
+
+  <div class="hero-description">
+    <p>A sanctuary dedicated to holistic healing, ancient Ayurvedic wisdom, and the timeless art of restoration. Guided by Jen Glo, we invite you to begin your journey towards deep, lasting wellbeing.</p>
+  </div>
+
+  <div class="hero-sub">Discover Services</div>
+
+  <div class="cat-btns">
+    <a href="#book-massage" class="cat-btn">Massage Therapies</a>
+    <a href="#book-reiki" class="cat-btn">Reiki</a>
+    <a href="#book-ayurvedic" class="cat-btn">Ayurvedic Medicine</a>
+  </div>
+
+  <a href="#book-massage" class="learn-btn">Reserve a Session</a>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+  </div>
+</section>
+
+<!-- ===== MASSAGE BOOKING ===== -->
+<section class="booking-section" id="book-massage">
+  <div class="booking-inner">
+    <div class="booking-info reveal">
+      <div class="img-card">
+        <img src="https://github.com/attytaborda-dot/Sankalpa2/blob/main/Massage1.png?raw=true" alt="Massage therapy" style="width:100%;height:100%;object-fit:cover;"/>
+      </div>
+      <div class="booking-info-text">
+        <p>Each massage session is crafted to release tension, improve circulation, and promote deep relaxation. We tailor every technique to your body's unique needs.</p>
+        <ul>
+          <li>Deep Tissue – targets chronic muscle pain</li>
+          <li>Swedish – gentle full-body relaxation</li>
+          <li>Hot Stone – warmth & muscle release</li>
+          <li>Aromatherapy – essential oil-enhanced</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="booking-form-wrap reveal" style="transition-delay:.15s">
+      <div class="sec-head">
+        <span class="label">Book Now</span>
+        <h2>Massage Session</h2>
+      </div>
+
+      <div class="form-group">
+        <label>Select Massage</label>
+        <select id="massage-select" onchange="updateMassagePrice()">
+          <option value="deep" data-price="75">Deep Tissue – 60 min</option>
+          <option value="swedish" data-price="65">Swedish – 60 min</option>
+          <option value="hotstone" data-price="85">Hot Stone – 75 min</option>
+          <option value="aroma" data-price="70">Aromatherapy – 60 min</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Preferred Date</label>
+        <input type="date" id="massage-date"/>
+      </div>
+      <div class="form-group">
+        <label>Preferred Time</label>
+        <select>
+          <option>9:00 AM</option>
+          <option>10:30 AM</option>
+          <option>12:00 PM</option>
+          <option>2:00 PM</option>
+          <option>3:30 PM</option>
+          <option>5:00 PM</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Full name"/>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@email.com"/>
+      </div>
+      <div class="form-group">
+        <label>Special Requests or Health Notes</label>
+        <textarea placeholder="Any allergies, injuries, or preferences..."></textarea>
+      </div>
+
+      <div class="price-display">£<span id="massage-price">75</span> <span>per session</span></div>
+      <button class="book-btn" onclick="openModal('Massage Session','deep')">Pay &amp; Book</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REIKI BOOKING ===== -->
+<section class="booking-section" id="book-reiki">
+  <div class="booking-inner">
+    <div class="booking-info reveal">
+      <div class="img-card">
+        <img src="https://github.com/attytaborda-dot/Sankalpa2/blob/main/Reiki1.png?raw=true" alt="Reiki healing" style="width:100%;height:100%;object-fit:cover;"/>
+      </div>
+      <div class="booking-info-text">
+        <p>Reiki gently restores balance to your energy system, reducing stress and promoting a sense of peace and clarity. Sessions are calming, non-invasive, and deeply restorative.</p>
+        <ul>
+          <li>Usui Reiki – classic energy balancing session</li>
+          <li>Chakra Healing – realigns your energy centres</li>
+          <li>Distance Reiki – receive healing from home</li>
+          <li>Reiki &amp; Meditation – combined deep-mind session</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="booking-form-wrap reveal" style="transition-delay:.15s">
+      <div class="sec-head">
+        <span class="label">Book Now</span>
+        <h2>Reiki Session</h2>
+      </div>
+
+      <div class="form-group">
+        <label>Select Session</label>
+        <select id="reiki-select" onchange="updateReikiPrice()">
+          <option value="usui" data-price="65">Usui Reiki – 60 min</option>
+          <option value="chakra" data-price="80">Chakra Healing – 75 min</option>
+          <option value="distance" data-price="55">Distance Reiki – 45 min</option>
+          <option value="meditation" data-price="90">Reiki &amp; Meditation – 90 min</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Preferred Date</label>
+        <input type="date" id="reiki-date"/>
+      </div>
+      <div class="form-group">
+        <label>Preferred Time</label>
+        <select>
+          <option>9:00 AM</option>
+          <option>10:30 AM</option>
+          <option>12:00 PM</option>
+          <option>2:00 PM</option>
+          <option>3:30 PM</option>
+          <option>5:00 PM</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Full name"/>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@email.com"/>
+      </div>
+      <div class="form-group">
+        <label>Special Requests or Health Notes</label>
+        <textarea placeholder="Any allergies, injuries, or preferences..."></textarea>
+      </div>
+
+      <div class="price-display">£<span id="reiki-price">65</span> <span>per session</span></div>
+      <button class="book-btn" onclick="openModal('Reiki Session','usui')">Pay &amp; Book</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AYURVEDIC BOOKING ===== -->
+<section class="booking-section" id="book-ayurvedic">
+  <div class="booking-inner">
+    <div class="booking-info reveal">
+      <div class="img-card">
+        <img src="https://github.com/attytaborda-dot/Sankalpa2/blob/main/Ayurvedic.png?raw=true" alt="Ayurvedic medicine" style="width:100%;height:100%;object-fit:cover;"/>
+      </div>
+      <div class="booking-info-text">
+        <p>Ayurvedic medicine takes a holistic approach — treatments are individually designed around your unique constitution and current needs.</p>
+        <ul>
+          <li>Dosha Consultation – discover your Ayurvedic type</li>
+          <li>Shirodhara – warm oil pour for deep calm</li>
+          <li>Panchakarma – traditional detox programme</li>
+          <li>Abhyanga – full-body warm oil massage</li>
+          <li>Herbal Rasayana – personalised rejuvenation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="booking-form-wrap reveal" style="transition-delay:.15s">
+      <div class="sec-head">
+        <span class="label">Book Now</span>
+        <h2>Ayurvedic Appointment</h2>
+      </div>
+
+      <div class="form-group">
+        <label>Select Treatment</label>
+        <select id="ayurvedic-select" onchange="updateAyurvedicPrice()">
+          <option value="dosha" data-price="70">Dosha Consultation – 60 min</option>
+          <option value="shirodhara" data-price="110">Shirodhara – 45 min</option>
+          <option value="panchakarma" data-price="250">Panchakarma Programme – half day</option>
+          <option value="abhyanga" data-price="95">Abhyanga – 60 min</option>
+          <option value="rasayana" data-price="85">Herbal Rasayana – 60 min</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Preferred Date</label>
+        <input type="date" id="ayurvedic-date"/>
+      </div>
+      <div class="form-group">
+        <label>Preferred Time</label>
+        <select>
+          <option>9:00 AM</option>
+          <option>10:30 AM</option>
+          <option>12:00 PM</option>
+          <option>2:00 PM</option>
+          <option>3:30 PM</option>
+          <option>5:00 PM</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Full name"/>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="you@email.com"/>
+      </div>
+      <div class="form-group">
+        <label>Special Requests or Health Notes</label>
+        <textarea placeholder="Any allergies, injuries, or preferences..."></textarea>
+      </div>
+
+      <div class="price-display">£<span id="ayurvedic-price">70</span> <span>per appointment</span></div>
+      <button class="book-btn" onclick="openModal('Ayurvedic Appointment','dosha')">Pay &amp; Book</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT + TESTIMONIALS ===== -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <span class="label">About Sankalpa</span>
+    <h2>A Journey Towards Wholeness</h2>
+    <p>Sankalpa is rooted in the belief that true wellness encompasses the body, mind and spirit. Founded by Jen Glo, our practice brings together the ancient wisdom of Ayurveda, the gentle art of massage therapy, and the transformative power of Reiki under one roof — creating a sanctuary for genuine healing and renewal.</p>
+
+    <div class="testimonials reveal">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"An absolutely transformative experience. The Ayurvedic consultation was incredibly thorough and the treatments left me feeling truly restored."</p>
+        <div class="author">— Sarah M.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"I've had massage treatments at many spas, but nothing compares to the depth and care here. Highly recommend the hot stone therapy."</p>
+        <div class="author">— James T.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"The Reiki sessions have been a game changer for my anxiety. Jen creates such a peaceful, nurturing space. A true hidden gem."</p>
+        <div class="author">— Eleanor R.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEET YOUR GUIDE ===== -->
+<section class="guide-section" id="guide">
+  <div class="guide-inner reveal">
+    <div class="guide-image-wrapper">
+      <div class="guide-image">
+        <img src="https://github.com/attytaborda-dot/Sankalpa2/blob/main/Guide1.png?raw=true" alt="Jen Glo" style="width:100%;height:100%;object-fit:cover;"/>
+      </div>
+      <div class="guide-badge">
+        <div class="years">15+</div>
+        <div class="label">Years of Practice</div>
+      </div>
+    </div>
+    
+    <div class="guide-content">
+      <span class="sec-label">Meet Your Guide</span>
+      <h2>Jen Glo</h2>
+      <p>With over fifteen years of dedicated study in Ayurvedic medicine, massage therapy, and energy healing, Jen Glo founded Sankalpa with a singular vision — to create a space where every individual feels truly seen, nourished, and restored.</p>
+      <p>Jen's approach blends the ancient wisdom of Ayurveda with modern therapeutic techniques, crafting bespoke programmes that honour each client's unique constitution and life journey.</p>
+      <div class="guide-signature">
+        <div class="name">Jen Glo</div>
+        <div class="title">Founder &amp; Lead Practitioner, Sankalpa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT SECTION ===== -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <span class="sec-label">Get in Touch</span>
+    <h2>Find Us</h2>
+    
+    <div class="contact-cards">
+      <div class="contact-card reveal">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#d63384" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <h3>Visit Us</h3>
+        <p>12 Wellness Lane<br/>Kensington<br/>London, W8 4PT</p>
+      </div>
+      
+      <div class="contact-card reveal" style="transition-delay:.1s">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#dc3545" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </div>
+        <h3>Call Us</h3>
+        <p class="detail">+44 (0)20 7946 0321</p>
+        <p>Mon – Sat<br/>08:00 – 20:00</p>
+      </div>
+      
+      <div class="contact-card reveal" style="transition-delay:.2s">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#9b59b6" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <h3>Email Us</h3>
+        <p class="detail"><a href="mailto:hello@sankalpa.co.uk">hello@sankalpa.co.uk</a></p>
+        <p>We aim to respond<br/>within 24 hours</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>© 2026 Sankalpa Ayurvedic Wellness · All rights reserved · <a href="#">Privacy Policy</a> · <a href="#">Terms</a></p>
+</footer>
+
+<!-- ===== BOOKING CONFIRMATION MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-check">
+      <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h3>Booking Confirmed</h3>
+    <p>Thank you for choosing Sankalpa. A confirmation has been sent to your email.</p>
+    <div class="modal-detail" id="modalDetail">–</div>
+    <button class="modal-btn" onclick="closeModal()">Done</button>
+  </div>
+</div>
+
+<!-- ===== JS ===== -->
+<script>
+// ── navbar scroll ──
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── mobile menu ──
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.add('open');
+});
+document.getElementById('mobileClose').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.remove('open');
+});
+document.querySelectorAll('.mobile-link').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+});
+
+// ── scroll reveal ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+reveals.forEach(el => observer.observe(el));
+
+// ── price updates ──
+function getSelectedPrice(selectId) {
+  const sel = document.getElementById(selectId);
+  return sel.options[sel.selectedIndex].dataset.price;
+}
+function updateMassagePrice(){document.getElementById('massage-price').textContent = getSelectedPrice('massage-select')}
+function updateReikiPrice(){document.getElementById('reiki-price').textContent = getSelectedPrice('reiki-select')}
+function updateAyurvedicPrice(){document.getElementById('ayurvedic-price').textContent = getSelectedPrice('ayurvedic-select')}
+
+// ── modal ──
+function openModal(type, value){
+  const price = document.querySelector('[id$="-select"]') ? '–' : '–';
+  // figure out price from whichever select is relevant
+  let p = '–', sel;
+  if(type.includes('Massage')){ sel = document.getElementById('massage-select'); }
+  else if(type.includes('Reiki')){ sel = document.getElementById('reiki-select'); }
+  else { sel = document.getElementById('ayurvedic-select'); }
+  p = sel.options[sel.selectedIndex].dataset.price;
+  const txt = sel.options[sel.selectedIndex].text;
+
+  document.getElementById('modalDetail').innerHTML =
+    '<strong>' + type + '</strong><br/>' + txt + '<br/><br/>Price: <strong>£' + p + '</strong><br/>Payment processed via Stripe (demo)';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); }
+document.getElementById('modalOverlay').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+
+// ── set min date to today ──
+(function(){
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelectorAll('input[type=date]').forEach(i => i.setAttribute('min', today));
+})();
+</script>
+</body>
+</html>
